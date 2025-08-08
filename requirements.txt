@@ -2,3 +2,5 @@ marimo
 duckdb
 numpy
 pandas
+fastparquet
+mysql-connector-python
