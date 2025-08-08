@@ -8,6 +8,34 @@ app = marimo.App()
 def _():
     import marimo as mo
     import duckdb
+    import pandas as pd
+    return duckdb, mo
+
+
+@app.cell
+def _(duckdb):
+    conn = duckdb.connect()
+
+    conn.execute('''
+        CREATE TABLE flights
+        as
+        SELECT * FROM read_csv_auto('data/flights.csv')
+        LIMIT 1000
+        ''').df()
+    return (conn,)
+
+
+@app.cell
+def _(conn, mo):
+    conn.execute('''
+        CREATE OR REPLACE TABLE airports(
+            IATA_CODE VARCHAR, AIRPORT VARCHAR, CITY VARCHAR,
+            STATE VARCHAR, COUNTRY VARCHAR, LATITUDE VARCHAR,
+            LONGITUDE VARCHAR);
+        COPY airports FROM 'data/airports.csv' (AUTO_DETECT TRUE);
+    ''')
+
+    mo.plain(conn.execute('SELECT * FROM airports').df())
     return
 
 
