@@ -26,7 +26,7 @@ def _(duckdb):
 
 
 @app.cell
-def _(conn, mo):
+def _(conn):
     conn.execute('''
         CREATE OR REPLACE TABLE airports(
             IATA_CODE VARCHAR, AIRPORT VARCHAR, CITY VARCHAR,
@@ -35,7 +35,30 @@ def _(conn, mo):
         COPY airports FROM 'data/airports.csv' (AUTO_DETECT TRUE);
     ''')
 
-    mo.plain(conn.execute('SELECT * FROM airports').df())
+    df = conn.execute('SELECT * FROM airports').df()
+    return (df,)
+
+
+@app.cell
+def _(df):
+    df
+    return
+
+
+@app.cell
+def _(mo):
+    mo.md(
+        r"""
+    /// attention | Attention!
+
+    This is important
+    """
+    )
+    return
+
+
+@app.cell
+def _():
     return
 
 
