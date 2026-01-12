@@ -1,6 +1,6 @@
 import marimo
 
-__generated_with = "0.14.16"
+__generated_with = "0.14.17"
 app = marimo.App()
 
 
@@ -8,7 +8,7 @@ app = marimo.App()
 def _():
     import marimo as mo
     import duckdb
-    import pandas as pd
+    import polars as pl
     return duckdb, mo
 
 
