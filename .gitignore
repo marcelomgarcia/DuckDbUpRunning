@@ -1,5 +1,5 @@
 # DuckDbUpRunning
-data_flights
+data/flights
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
